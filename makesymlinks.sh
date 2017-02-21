@@ -3,7 +3,7 @@
 # .make.sh
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
 # EASY on line install
-# git clone git://github.com/kesslerdev/dotfiles.git ~/dotfiles && cd ~/dotfiles && chmod +x makesymlinks.sh && ./makesymlinks.sh
+# git clone https://github.com/kesslerdev/dotfiles.git ~/dotfiles && cd ~/dotfiles && chmod +x makesymlinks.sh && ./makesymlinks.sh
 ############################
 
 ########## Variables
