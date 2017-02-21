@@ -1,0 +1,5 @@
+dir=~/dotfiles                    # dotfiles directory
+olddir=~/dotfiles_old             # old dotfiles backup directory
+aliasdir=$dir/alias               # old dotfiles backup directory
+
+#load alias files

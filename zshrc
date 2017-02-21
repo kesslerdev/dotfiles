@@ -7,3 +7,7 @@ if [ -f $olddir/.zshrc ]; then
     echo "[DotFiles] Using old dotfile $olddir/.zshrc"
     . $olddir/.zshrc
 fi
+
+if [ -f $dir/aliasrc ]; then
+    . $dir/aliasrc
+fi

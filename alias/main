@@ -1,0 +1,12 @@
+
+#zsh
+alias aliasrc='gedit ~/.aliasrc && zshreload'
+alias zshreload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
+
+#docker autoco
+alias doco='docker exec -ti main_web_1 bash -c "export TERM=xterm;cd /home/skimia/www/vhosts;gosu skimia zsh"'
+alias doru='sh -c "cd ~/Develop/main;export USER_IDD=`id -u $USER`;docker-compose stop; docker-compose rm -f;docker-compose up"'
+
+alias reset-wifi='echo "stop networkmanager..." && sudo service network-manager stop && sleep 3 && echo "clear state..." && sudo rm /var/lib/NetworkManager/NetworkManager.state && sleep 3 && echo "start networkmanager..." && sudo service network-manager start'
+
+echo "alias loaded"
