@@ -3,3 +3,6 @@ olddir=~/dotfiles_old             # old dotfiles backup directory
 aliasdir=$dir/alias               # old dotfiles backup directory
 
 #load alias files
+if [ -d $aliasdir ]; then
+    for f in $aliasdir/*; do source $f; done
+fi
