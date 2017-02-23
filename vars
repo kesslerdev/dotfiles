@@ -1,0 +1,11 @@
+########## Variables
+
+dotfiles_dir=$DOTFILES_DIR                              # dotfiles directory
+dotfiles_olddir_suffix=_old                             # old dotfiles backup directory suffix
+dotfiles_olddir="$DOTFILES_DIR$dotfiles_olddir_suffix"  # old dotfiles backup directory
+
+dotfiles_aliasdir="$dotfiles_dir/alias"                 # dotfiles aliases
+
+
+dotfiles_files="bashrc zshrc gitconfig"                 # list of files/folders to symlink in homedir
+

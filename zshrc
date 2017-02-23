@@ -1,13 +1,12 @@
+export DOTFILES_DIR=~/dotfiles
+source $DOTFILES_DIR/vars
 #used to run dotfiles files with keeping system default .zshrc
 
-dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
-
-if [ -f $olddir/.zshrc ]; then
-    echo "[DotFiles] Using old dotfile $olddir/.zshrc"
-    . $olddir/.zshrc
+if [ -f $dotfiles_olddir/.zshrc ]; then
+    echo "[DotFiles] Using old dotfile $dotfiles_olddir/.zshrc"
+    . $dotfiles_olddir/.zshrc
 fi
 
-if [ -f $dir/aliasrc ]; then
-    . $dir/aliasrc
+if [ -f $dotfiles_dir/aliasrc ]; then
+    . $dotfiles_dir/aliasrc
 fi

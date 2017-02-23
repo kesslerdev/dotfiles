@@ -1,8 +1,14 @@
-dir=~/dotfiles                    # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
-aliasdir=$dir/alias               # old dotfiles backup directory
+source $DOTFILES_DIR/vars
 
 #load alias files
-if [ -d $aliasdir ]; then
-    for f in $aliasdir/*; do source $f; done
+if [ -d $dotfiles_aliasdir ]; then
+    for f in $dotfiles_aliasdir/*; do source $f; done
 fi
+
+#add dotfile cli
+dotfiles() {
+    if [[ $@ == "update" ]]; then
+        old_dir=$PWD
+        cd $dir && chmod +x update.sh && ./update.sh ; cd $old_dir
+    fi
+}
