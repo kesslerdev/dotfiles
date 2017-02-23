@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "[Kessler's Dotfiles'] Update"
+echo "[Kessler's Dotfiles'] Update $DOTFILES_DIR"
 source $DOTFILES_DIR/vars
 #go to dotfiles directory
 cd $dotfiles_dir

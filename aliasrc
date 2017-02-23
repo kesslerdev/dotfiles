@@ -9,6 +9,6 @@ fi
 dotfiles() {
     if [[ $@ == "update" ]]; then
         old_dir=$PWD
-        cd $dir && chmod +x update.sh && ./update.sh ; cd $old_dir
+        cd $dotfiles_dir && chmod +x update.sh && ./update.sh ; cd $old_dir
     fi
 }
