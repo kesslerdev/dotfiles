@@ -1,5 +1,5 @@
 
-#sql
+#files
 
 
 #changes all lines ending with linux in all files in current directory
