@@ -7,8 +7,10 @@
 ############################
 
 ########## Variables
+if [ -z "$DOTFILES_DIR" ]; then
+    export DOTFILES_DIR=~/dotfiles
+fi
 
-export DOTFILES_DIR=~/dotfiles
 source $DOTFILES_DIR/vars
 
 ##########
