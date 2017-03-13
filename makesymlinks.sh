@@ -7,8 +7,12 @@
 ############################
 
 ########## Variables
+if [ -z "$DOTFILES_HOMEDIR" ]; then
+    export DOTFILES_HOMEDIR=~
+fi
+
 if [ -z "$DOTFILES_DIR" ]; then
-    export DOTFILES_DIR=~/dotfiles
+    export DOTFILES_DIR=$DOTFILES_HOMEDIR/dotfiles
 fi
 
 source $DOTFILES_DIR/vars
@@ -28,8 +32,8 @@ echo "...done"
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $dotfiles_files; do
     #check if is already a symlink that point to $dotfiles_dir/$file to avoid replace
-    echo "Moving existing dotfile .$file from ~ to $dotfiles_olddir"
-    mv ~/.$file $dotfiles_olddir/
+    echo "Moving existing dotfile .$file from $DOTFILES_HOMEDIR to $dotfiles_olddir"
+    mv $DOTFILES_HOMEDIR/.$file $dotfiles_olddir/
     echo "Creating symlink to $file in home directory."
-    ln -s $dotfiles_dir/$file ~/.$file
+    ln -s $dotfiles_dir/$file $DOTFILES_HOMEDIR/.$file
 done
