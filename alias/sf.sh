@@ -2,21 +2,21 @@
 #sf
 
 sf() {
-    if [[ $@ == "cc" ]]; then
+    if [[ $1 == "cc" ]]; then
         command bin/console cache:clear --env=test
-    elif [[ $@ == "b" ]]; then
-	    command bin/behat
-    elif [[ $@ == "mock" ]]; then
+    elif [[ $1 == "b" ]]; then
+	    command bin/behat ${@:2}
+    elif [[ $1 == "mock" ]]; then
 	    command bin/sf3_restart_mock_servers
-    elif [[ $@ == "mockb" ]]; then
+    elif [[ $1 == "mockb" ]]; then
 	    sf mock && sf b
-    elif [[ $@ == "br" ]]; then
-	    command bin/behat --rerun
-    elif [[ $@ == "ccb" ]]; then
-	    sf cc && sf b
-    elif [[ $@ == "ccbr" ]]; then
-	    sf cc && sf br
+    elif [[ $1 == "br" ]]; then
+	    command bin/behat --rerun ${@:2}
+    elif [[ $1 == "ccb" ]]; then
+	    sf cc && sf b ${@:2}
+    elif [[ $1 == "ccbr" ]]; then
+	    sf cc && sf br ${@:2}
     else
-        command echo "unknown operation" "\"$@\""
+        command echo "unknown operation" "\"$1\""
     fi
 }
