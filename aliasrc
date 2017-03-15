@@ -10,5 +10,10 @@ dotfiles() {
     if [[ $@ == "update" ]]; then
         old_dir=$PWD
         cd $dotfiles_dir && chmod +x update.sh && ./update.sh ; cd $old_dir
+    elif [[ $@ == "reload" ]]; then
+        echo "[DotFiles] reload alias in $dotfiles_aliasdir"
+        if [ -d $dotfiles_aliasdir ]; then
+            for f in $dotfiles_aliasdir/*; do source $f; done
+        fi
     fi
 }
