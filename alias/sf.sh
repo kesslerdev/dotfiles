@@ -16,6 +16,12 @@ sf() {
 	    sf cc && sf b ${@:2}
     elif [[ $1 == "ccbr" ]]; then
 	    sf cc && sf br ${@:2}
+    elif [[ $1 == "codecov" ]]; then
+        begin=$(date +"%s")
+	    ssdv xdebug cli on && sf b --profile coverage ${@:2} && ssdv xdebug cli off
+        termin=$(date +"%s")
+        difftimelps=$(($termin-$begin))
+        echo "$(($difftimelps / 60))m$(($difftimelps % 60))s elapsed for coverage generation."
     else
         command echo "unknown operation" "\"$1\""
     fi

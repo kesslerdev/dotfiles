@@ -4,9 +4,20 @@ ssdv() {
     if [[ $1 == "xdebug" ]]; then
         if [[ $2 == "cli" ]]; then
             if [[ $3 == "off" ]]; then
-                command sudo rm /etc/php5/cli/conf.d/25-xdebug.ini
+                echo "[DotFiles] disable xdebug for cli"
+                if [ -f /etc/php5/cli/conf.d/25-xdebug.ini ]; then
+                    command sudo rm /etc/php5/cli/conf.d/25-xdebug.ini
+                else
+                    echo "Already disabled"
+                fi
             else
-                command sudo ln -s /etc/php5/cli/25-xdebug.ini /etc/php5/cli/conf.d/25-xdebug.ini
+                echo "[DotFiles] enable xdebug for cli"
+                if [ ! -f /etc/php5/cli/conf.d/25-xdebug.ini ]; then
+                    command sudo ln -s /etc/php5/cli/25-xdebug.ini /etc/php5/cli/conf.d/25-xdebug.ini
+                else
+                    echo "Already enabled"
+                fi
+                
             fi
         elif [[ $2 == "apache" ]]; then
 	        command echo "uimplemented operation" "\"$1:$2\""  
