@@ -18,7 +18,7 @@ sf() {
 	    sf cc && sf br ${@:2}
     elif [[ $1 == "codecov" ]]; then
         begin=$(date +"%s")
-	    ssdv xdebug cli on && sf b --profile coverage ${@:2} && ssdv xdebug cli off
+	    ssdv xdebug apache on && ssdv xdebug cli on && sf b --tags '~@no-cov' --profile coverage ${@:2} && ssdv xdebug apache off && ssdv xdebug cli off
         termin=$(date +"%s")
         difftimelps=$(($termin-$begin))
         echo "$(($difftimelps / 60))m$(($difftimelps % 60))s elapsed for coverage generation."
