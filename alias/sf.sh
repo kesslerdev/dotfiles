@@ -4,6 +4,10 @@
 sf() {
     if [[ $1 == "cc" ]]; then
         command bin/console cache:clear --env=test
+    elif [[ $1 == "dbd" ]]; then
+	    command bin/console doctrine:migrations:diff --env=test
+    elif [[ $1 == "dbm" ]]; then
+	    command bin/console doctrine:migrations:migrate  --env=test
     elif [[ $1 == "b" ]]; then
 	    command bin/behat ${@:2}
     elif [[ $1 == "mock" ]]; then
