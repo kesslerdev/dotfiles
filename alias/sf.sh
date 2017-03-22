@@ -27,6 +27,9 @@ sf() {
         difftimelps=$(($termin-$begin))
         echo "$(($difftimelps / 60))m$(($difftimelps % 60))s elapsed for coverage generation."
     else
-        command echo "unknown operation" "\"$1\""
+        if [[ $1 != "" ]]; then
+            command echo "unknown operation" "\"$1\" => defaults to symfony console"
+        fi
+        command bin/console ${@:1}
     fi
 }
