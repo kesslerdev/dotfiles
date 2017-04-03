@@ -8,6 +8,8 @@ sf() {
 	    command bin/console doctrine:migrations:diff --env=test
     elif [[ $1 == "dbm" ]]; then
 	    command bin/console doctrine:migrations:migrate  --env=test
+    elif [[ $1 == "dbr" ]]; then
+	    command bin/console doctrine:migrations:migrate prev  --env=test
     elif [[ $1 == "b" ]]; then
 	    command bin/behat ${@:2}
     elif [[ $1 == "mock" ]]; then
