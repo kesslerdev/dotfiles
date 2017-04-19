@@ -75,4 +75,7 @@ delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' 
 oneline = log --pretty=oneline --abbrev-commit --graph --decorate
 
 #Annuler le dernier commit
-undo = git reset --soft HEAD^
+undo = reset --soft HEAD^
+
+# stash all exept indexed(staged)
+stash-unstaged = stash save --include-untracked --keep-index
