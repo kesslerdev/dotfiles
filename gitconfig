@@ -79,3 +79,8 @@ undo = reset --soft HEAD^
 
 # stash all exept indexed(staged)
 stash-unstaged = stash save --include-untracked --keep-index
+
+#LOCAL IGNORE FILES
+ignore = update-index --skip-worktree
+unignore = update-index --no-skip-worktree
+ignored = !git ls-files -v | grep "^S"
