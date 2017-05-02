@@ -18,7 +18,25 @@ git() {
     if [[ $@ == "branch" ]]; then
         command git branch -a
     elif [[ $@ == "remote-prune" ]]; then
-	command git remote | xargs -t -L1 git remote prune
+	    command git remote | xargs -t -L1 git remote prune
+    elif [[ $1 == "patch" ]]; then
+
+	    if [[ $2 == "create" ]]; then
+            command git format-patch -n HEAD^
+        elif [[ $2 == "apply" ]]; then
+	        
+            if [[ $3 == "check" ]]; then
+                command git apply --check ${@:4}
+            elif [[ $3 == "stat" ]]; then
+                command git apply --stat ${@:4}
+            else
+                command git am --signoff < ${@:3}
+            fi
+
+        else
+            echo "uknown patch command \"$2\""
+        fi
+
     else
         command git "$@"
     fi
