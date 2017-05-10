@@ -18,10 +18,18 @@ sf() {
 	    sf mock && sf b
     elif [[ $1 == "br" ]]; then
 	    command bin/behat --rerun ${@:2}
+    elif [[ $1 == "bs" ]]; then
+	    command bin/behat --stop-on-failure ${@:2}
+    elif [[ $1 == "brs" ]]; then
+	    command bin/behat --rerun --stop-on-failure ${@:2}
     elif [[ $1 == "ccb" ]]; then
 	    sf cc && sf b ${@:2}
     elif [[ $1 == "ccbr" ]]; then
 	    sf cc && sf br ${@:2}
+    elif [[ $1 == "ccbs" ]]; then
+	    sf cc && sf bs ${@:2}
+    elif [[ $1 == "ccbrs" ]]; then
+	    sf cc && sf brs ${@:2}
     elif [[ $1 == "codecov" ]]; then
         begin=$(date +"%s")
 	    ssdv xdebug apache on && ssdv xdebug cli on && sf b --tags '~@no-cov' --profile coverage ${@:2} && ssdv xdebug apache off && ssdv xdebug cli off
