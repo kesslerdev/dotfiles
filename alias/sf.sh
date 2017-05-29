@@ -12,6 +12,8 @@ sf() {
 	    command bin/console doctrine:migrations:migrate prev  --env=test
     elif [[ $1 == "b" ]]; then
 	    command bin/behat ${@:2}
+    elif [[ $1 == "gb" ]]; then
+	    command git list-modified | grep -E "tests.*\.feature$" > /tmp/behat.temp.scenarios && sf b ./.temp.scenarios && rm /tmp/behat.temp.scenarios
     elif [[ $1 == "mock" ]]; then
 	    command bin/sf3_restart_mock_servers
     elif [[ $1 == "mockb" ]]; then
@@ -24,6 +26,10 @@ sf() {
 	    command bin/behat --rerun --stop-on-failure ${@:2}
     elif [[ $1 == "ccb" ]]; then
 	    sf cc && sf b ${@:2}
+    elif [[ $1 == "ccgb" ]]; then
+	    command git list-modified | grep -E "tests.*\.feature$" > /tmp/behat.temp.scenarios && sf ccb ./.temp.scenarios && rm /tmp/behat.temp.scenarios
+    elif [[ $1 == "ccgbr" ]]; then
+	    command git list-modified | grep -E "tests.*\.feature$" > /tmp/behat.temp.scenarios && sf ccbr ./.temp.scenarios && rm /tmp/behat.temp.scenarios
     elif [[ $1 == "ccbr" ]]; then
 	    sf cc && sf br ${@:2}
     elif [[ $1 == "ccbs" ]]; then

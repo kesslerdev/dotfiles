@@ -84,3 +84,5 @@ stash-unstaged = stash save --include-untracked --keep-index
 ignore = update-index --skip-worktree
 unignore = update-index --no-skip-worktree
 ignored = !git ls-files -v | grep "^S"
+
+list-modified = "!{ git diff --name-only ; git diff --name-only --staged ; git ls-files --other --exclude-standard ;} | sort | uniq"
