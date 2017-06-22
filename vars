@@ -11,3 +11,10 @@ dotfiles_securedir="$dotfiles_aliasdir/secure"          # dotfiles secure aliase
 dotfiles_files="bashrc zshrc gitconfig"                 # list of files/folders to symlink in homedir
 
 export VAULT_ADDR='https://vault.emeabridge.eu'
+
+
+########### PATH
+
+if [ -d ~/.local/bin ]; then
+    export PATH=~/.local/bin:$PATH
+fi
