@@ -1,5 +1,10 @@
 source $DOTFILES_DIR/vars
 
+#load secure alias files
+if [ -d $dotfiles_securedir ]; then
+    for f in $dotfiles_securedir/*; do source $f; done
+fi
+
 #load alias files
 if [ -d $dotfiles_aliasdir ]; then
     for f in $dotfiles_aliasdir/*; do source $f; done
@@ -12,6 +17,7 @@ dotfiles() {
         cd $dotfiles_dir && chmod +x update.sh && ./update.sh ; cd $old_dir
     elif [[ $@ == "reload" ]]; then
         echo "[DotFiles] reload alias in $dotfiles_aliasdir"
+        source $DOTFILES_DIR/vars
         if [ -d $dotfiles_aliasdir ]; then
             for f in $dotfiles_aliasdir/*; do source $f; done
         fi

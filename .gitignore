@@ -1,0 +1,3 @@
+alias/secure/*
+!alias/secure/.gitkeep
+!alias/secure/a
