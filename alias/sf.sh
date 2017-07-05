@@ -3,7 +3,7 @@
 
 sf() {
     if [[ $1 == "cc" ]]; then
-        command bin/console cache:clear --env=test
+        command bin/console cache:clear --no-warmup --env=test && bin/console cache:warmup --env=test
     elif [[ $1 == "dbd" ]]; then
 	    command bin/console doctrine:migrations:diff --env=test
     elif [[ $1 == "dbm" ]]; then
