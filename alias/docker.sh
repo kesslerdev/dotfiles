@@ -1,7 +1,7 @@
 #docker autoco
 
 alias doco='docker exec -ti main_web_1 bash -c "export TERM=xterm;cd /home/skimia/www/vhosts;gosu skimia zsh"'
-alias doru='sh -c "cd ~/Develop/main;export USER_IDD=`id -u $USER`;docker-compose stop; docker-compose rm -f;docker-compose up"'
+alias doru='sudo fuser -k 80/tcp && sh -c "cd ~/Develop/main;export USER_IDD=`id -u $USER`;docker-compose stop; docker-compose rm -f;docker-compose up"'
 
 # ------------------------------------
 # Docker alias and function

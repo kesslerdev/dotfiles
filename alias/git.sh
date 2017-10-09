@@ -19,12 +19,16 @@ git() {
         command git branch -a
     elif [[ $@ == "remote-prune" ]]; then
 	    command git remote | xargs -t -L1 git remote prune
+    elif [[ $@ == "com" ]]; then
+	    gitcom
+    elif [[ $@ == "comp" ]]; then
+	    gitcom && git push -u origin $(git branch-name) -f
     elif [[ $1 == "patch" ]]; then
 
 	    if [[ $2 == "create" ]]; then
             command git format-patch -n HEAD^
         elif [[ $2 == "apply" ]]; then
-	        
+
             if [[ $3 == "check" ]]; then
                 command git apply --check ${@:4}
             elif [[ $3 == "stat" ]]; then
