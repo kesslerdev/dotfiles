@@ -19,3 +19,5 @@ fi
 if [ ! -d $HOME/.hist ]; then
     mkdir $HOME/.hist
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

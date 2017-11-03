@@ -2,20 +2,40 @@
 #sf
 
 sf() {
+    if [ -f bin/console ]; then
+        console=bin/console
+    elif [ -f app/console ]; then
+        console=app/console
+    else
+        echo "console not found!"
+        return;
+    fi
+
     if [[ $1 == "cc" ]]; then
-        command bin/console cache:clear --no-warmup --env=test && bin/console cache:warmup --env=test
+        command $console cache:clear --no-warmup --env=test && $console cache:warmup --env=test
     elif [[ $1 == "dbd" ]]; then
-	    command bin/console doctrine:migrations:diff --env=test
+	    command $console doctrine:migrations:diff --env=test
+    elif [[ $1 == "resetdb" ]]; then
+            echo "resetting DB ..."
+            command $console doctrine:query:sql --env=test -q "DROP SCHEMA public CASCADE" && $console doctrine:query:sql --env=test -q "CREATE SCHEMA public" && $console doctrine:schema:create -q --env=test && $console doctrine:schema:create -q --env=test --em=event_sourcing
+            echo "OK!"
     elif [[ $1 == "dbm" ]]; then
-	    command bin/console doctrine:migrations:migrate  --env=test
+	    command $console doctrine:migrations:migrate  --env=test
     elif [[ $1 == "dbr" ]]; then
-	    command bin/console doctrine:migrations:migrate prev  --env=test
+	    command $console doctrine:migrations:migrate prev  --env=test
     elif [[ $1 == "b" ]]; then
 	    command bin/behat ${@:2}
     elif [[ $1 == "gb" ]]; then
 	    command git list-modified | grep -E "tests.*\.feature$" > /tmp/behat.temp.scenarios && sf b /tmp/behat.temp.scenarios && rm /tmp/behat.temp.scenarios
     elif [[ $1 == "mock" ]]; then
-	    command bin/sf3_restart_mock_servers
+        if [ -f bin/sf3_restart_mock_servers ]; then
+            command bin/sf3_restart_mock_servers
+        elif [ -f bin/mock_servers ]; then
+            command bin/mock_servers restart
+        else
+            echo "mocks not found !"
+            return;
+        fi
     elif [[ $1 == "mockb" ]]; then
 	    sf mock && sf b
     elif [[ $1 == "br" ]]; then
@@ -48,6 +68,6 @@ sf() {
         if [[ $1 != "" ]]; then
             command echo "unknown operation" "\"$1\" => defaults to symfony console"
         fi
-        command bin/console ${@:1}
+        command $console ${@:1}
     fi
 }

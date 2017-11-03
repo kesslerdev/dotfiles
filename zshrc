@@ -25,3 +25,5 @@ if [ ! -d $HOME/.hist ]; then
 fi
 
 export HISTFILE="$HOME/.hist/.zsh_history"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
