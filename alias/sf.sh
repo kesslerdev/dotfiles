@@ -12,7 +12,7 @@ sf() {
     fi
 
     if [[ $1 == "cc" ]]; then
-        command $console cache:clear --no-warmup --env=test && $console cache:warmup --env=test
+        command $console cache:clear --no-warmup --env=test && $console cache:warmup --env=test && php ~/dotfiles/alias/php/clear_apc.php
     elif [[ $1 == "dbd" ]]; then
 	    command $console doctrine:migrations:diff --env=test
     elif [[ $1 == "resetdb" ]]; then
