@@ -30,6 +30,8 @@ sf() {
     elif [[ $1 == "mock" ]]; then
         if [ -f bin/sf3_restart_mock_servers ]; then
             command bin/sf3_restart_mock_servers
+        elif [ -f bin/restart_mock_servers ]; then
+            command bin/restart_mock_servers
         elif [ -f bin/mock_servers ]; then
             command bin/mock_servers restart
         else
