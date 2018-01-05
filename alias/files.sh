@@ -11,3 +11,5 @@ force_utf8() {
     echo "Founded Charset: $CHARSET use command > iconv -c -f $CHARSET -t utf8//IGNORE $1 > $2"
     iconv -c -f $CHARSET -t utf8//IGNORE $1 > $2
 }
+
+alias printarbo="find . | sed 's/[^/]*\//|   /g;s/| *\([^| ]\)/+--- \1/'"
