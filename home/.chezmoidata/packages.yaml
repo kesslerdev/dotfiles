@@ -1,0 +1,13 @@
+packages:
+  ubuntu:
+    apt:
+    - curl
+    - gpg
+    - htop
+    - unzip
+    - vim
+    - wget
+    - zsh
+    - git
+    - procps
+    brews: []

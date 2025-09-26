@@ -19,12 +19,19 @@ defer = "{% for file in files %}zsh-defer source \"{{ "{{ file }}" }}\"\n{% endf
 github = 'romkatv/zsh-defer'
 apply = ['source']
 
+[plugins.compinit]
+inline = 'autoload -Uz compinit && zsh-defer compinit'
+
 [plugins.zsh-autosuggestions]
 github = 'zsh-users/zsh-autosuggestions'
 apply = ['defer']
 
 [plugins.zsh-syntax-highlighting]
 github = 'zsh-users/zsh-syntax-highlighting'
+apply = ['defer']
+
+[plugins.enhancd]
+github = "b4b4r07/enhancd"
 apply = ['defer']
 
 [plugins.starship]

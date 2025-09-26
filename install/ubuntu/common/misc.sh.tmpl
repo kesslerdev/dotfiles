@@ -7,14 +7,9 @@ if [ "${DOTFILES_DEBUG:-}" ]; then
 fi
 
 readonly PACKAGES=(
-    curl
-    gpg
-    htop
-    unzip
-    vim
-    wget
-    zsh
-    git
+{{- range .packages.ubuntu.apt }}
+    {{ . }}
+{{- end }}
 )
 
 function install_apt_packages() {
