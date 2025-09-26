@@ -5,6 +5,7 @@ typeset -gU path fpath
 path=(
     $path
     /usr/local/{,s}bin(N-/)
+    /snap/bin(N-/)
     ${HOME}/.local/bin(N-/)
     ${HOME}/.local/bin/common(N-/)
 )

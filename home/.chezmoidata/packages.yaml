@@ -13,7 +13,8 @@ packages:
       - procps
       - build-essential
       - gcc
-      brews: 
+      brews:
+      - fnm
       - yq
       - jq
       - kubectl
