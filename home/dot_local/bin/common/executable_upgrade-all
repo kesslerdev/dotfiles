@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+if [ "${DOTFILES_DEBUG:-}" ]; then
+    set -x
+fi
+
+function apt_upgrade() {
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt autoremove -y
+}
+
+function snap_upgrade() {
+    sudo snap refresh
+}
+
+function brew_upgrade() {
+    if command -v brew &>/dev/null; then
+        brew update
+        brew upgrade
+        brew cleanup
+    fi
+}
+
+function krew_upgrade() {
+    if command -v kubectl-krew &>/dev/null; then
+        kubectl-krew update
+        kubectl-krew upgrade
+    fi
+}
+
+apt_upgrade
+snap_upgrade
+brew_upgrade
+krew_upgrade

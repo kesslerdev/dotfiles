@@ -9,3 +9,4 @@ else
     my_ls="exa"
 fi
 alias ls="${my_ls} --long --group --header --binary --time-style=long-iso --icons"
+alias ll="${my_ls} --long --group --header --binary --time-style=long-iso --icons --all"
