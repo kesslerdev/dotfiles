@@ -14,6 +14,7 @@ readonly PACKAGES=(
     vim
     wget
     zsh
+    git
 )
 
 function install_apt_packages() {

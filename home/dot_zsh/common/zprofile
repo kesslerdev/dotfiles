@@ -13,3 +13,8 @@ fpath=(
     $fpath
     ${HOME}/.local/bin/common(N-/)
 )
+
+bindkey '^[[1;5C' emacs-forward-word
+bindkey '^[^[[D' emacs-backward-word
+bindkey ";5C" forward-word
+bindkey ";5D" backward-word
