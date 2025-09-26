@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+# Common zprofile for all systems
+source "${HOME}/.zsh/common/zprofile"

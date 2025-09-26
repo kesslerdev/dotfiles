@@ -1,0 +1,8 @@
+{{ if eq .system "perso" -}}
+.zsh/perso/zshrc
+{{ else if eq .system "work" -}}
+.zsh/work/zshrc
+{{ else -}}
+echo "Invalid system: {{ .system }}" >&2
+exit 1
+{{ end -}}

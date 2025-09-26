@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+# Common zshrc for all systems
+source "${HOME}/.zsh/common/zshrc"
