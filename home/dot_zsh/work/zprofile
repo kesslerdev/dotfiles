@@ -2,3 +2,15 @@
 
 # Common zprofile for all systems
 source "${HOME}/.zsh/common/zprofile"
+
+typeset -gU path fpath
+
+path=(
+    $path
+    ${HOME}/.local/bin/work(N-/)
+)
+
+fpath=(
+    $fpath
+    ${HOME}/.local/bin/work(N-/)
+)

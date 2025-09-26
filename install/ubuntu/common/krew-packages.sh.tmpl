@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+if [ "${DOTFILES_DEBUG:-}" ]; then
+    set -x
+fi
+
+function install_krew_packages() {
+{{- range .packages.ubuntu.common.krews }}
+/home/linuxbrew/.linuxbrew/bin/kubectl-krew install {{ . }}
+{{- end }}
+{{- range default list (get (default (dict "krews" list) (index .packages.ubuntu .system)) "krews") }}
+/home/linuxbrew/.linuxbrew/bin/kubectl-krew install {{ . }}
+{{- end }}
+}
+
+function uninstall_krew_packages() {
+    rm -rf "${HOME}/.krew"
+}
+
+function main() {
+    install_krew_packages
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main
+fi

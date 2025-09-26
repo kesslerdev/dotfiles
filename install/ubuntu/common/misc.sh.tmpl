@@ -7,7 +7,10 @@ if [ "${DOTFILES_DEBUG:-}" ]; then
 fi
 
 readonly PACKAGES=(
-{{- range .packages.ubuntu.apt }}
+{{- range .packages.ubuntu.common.apt }}
+    {{ . }}
+{{- end }}
+{{- range default list (get (default (dict "apt" list) (index .packages.ubuntu .system)) "apt") }}
     {{ . }}
 {{- end }}
 )

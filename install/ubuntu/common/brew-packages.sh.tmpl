@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+if [ "${DOTFILES_DEBUG:-}" ]; then
+    set -x
+fi
+
+
+function install_brew_packages() {
+    /home/linuxbrew/.linuxbrew/bin/brew bundle --cleanup --file=/dev/stdin <<EOF
+{{- range .packages.ubuntu.common.brews }}
+brew {{ . | quote }}
+{{- end }}
+{{- range default list (get (default (dict "brews" list) (index .packages.ubuntu .system)) "brews") }}
+brew {{ . | quote }}
+{{- end }}
+EOF
+}
+
+function uninstall_brew_packages() {
+    echo "" | /home/linuxbrew/.linuxbrew/bin/brew bundle cleanup --force --file=/dev/stdin
+}
+
+function main() {
+    install_brew_packages
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main
+fi

@@ -1,13 +1,26 @@
 packages:
   ubuntu:
-    apt:
-    - curl
-    - gpg
-    - htop
-    - unzip
-    - vim
-    - wget
-    - zsh
-    - git
-    - procps
-    brews: []
+    common:
+      apt:
+      - curl
+      - gpg
+      - htop
+      - unzip
+      - vim
+      - wget
+      - zsh
+      - git
+      - procps
+      - build-essential
+      - gcc
+      brews: 
+      - yq
+      - jq
+      - kubectl
+      - helm
+      - krew
+      krews:
+      - ctx
+      - ns
+    perso:
+      apt: []
