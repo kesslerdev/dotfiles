@@ -24,5 +24,7 @@ packages:
       krews:
       - ctx
       - ns
-    perso:
-      apt: []
+    work:
+      brews:
+      - derailed/k9s/k9s
+      - dive
