@@ -25,9 +25,12 @@ packages:
       - ctx
       - ns
       snaps: []
+      vscode:
+      - PKief.material-icon-theme
     perso:
-      snaps:
-      - code
+      snaps: []
+      vscode:
+      - openai.chatgpt
     work:
       brews:
       - derailed/k9s/k9s

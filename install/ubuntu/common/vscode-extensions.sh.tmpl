@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+if [ "${DOTFILES_DEBUG:-}" ]; then
+    set -x
+fi
+
+function install_code_exts() {
+    if type code >/dev/null 2>&1; then
+{{- range .packages.ubuntu.common.vscode }}
+code --install-extension {{ . }}
+{{- end }}
+{{- range default list (get (default (dict "vscode" list) (index .packages.ubuntu .system)) "vscode") }}
+code --install-extension {{ . }}
+{{- end }}
+    else
+        echo "no code command ignoring code extentions"
+    fi
+}
+
+function uninstall_code_exts() {
+    echo "uninstall code exts does nothing"
+}
+
+function main() {
+    install_code_exts
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main
+fi

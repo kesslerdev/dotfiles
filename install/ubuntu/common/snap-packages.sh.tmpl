@@ -8,6 +8,7 @@ fi
 
 
 function install_snap_packages() {
+echo "install snap packages"
 {{- range .packages.ubuntu.common.snaps }}
 snap install {{ . }} --classic
 {{- end }}
@@ -17,6 +18,7 @@ snap install {{ . }} --classic
 }
 
 function uninstall_snap_packages() {
+echo "remove snap packages"
 {{- range .packages.ubuntu.common.snaps }}
 snap remove {{ . }}
 {{- end }}

@@ -1,0 +1,8 @@
+{
+    "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
+    "terminal.integrated.fontLigatures.enabled": true,
+    "terminal.integrated.gpuAcceleration": "on",
+    "editor.fontFamily": "'FiraCode Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.fontLigatures": true,
+    "workbench.iconTheme": "material-icon-theme"
+}
