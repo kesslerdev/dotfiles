@@ -1,0 +1,11 @@
+#!/bin/bash
+{{ if eq .chezmoi.os "linux" -}}
+{{   if eq .chezmoi.osRelease.idLike "debian" -}}
+{{     if eq .system "perso" -}}
+# dconf.ini hash: {{ include "dconf.ini" | sha256sum }}
+dconf load / < {{ joinPath .chezmoi.sourceDir "dconf.ini" | quote }}
+{{     end -}}
+{{   else -}}
+       echo "Invalid linux distribution: {{ .chezmoi.osRelease.id }}"
+{{   end -}}
+{{ end -}}
