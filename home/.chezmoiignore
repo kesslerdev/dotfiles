@@ -1,0 +1,9 @@
+{{ template "chezmoiignore.d/common" . }}
+{{ if eq .chezmoi.os "linux" -}}
+{{   template "chezmoiignore.d/ubuntu/common" . }}
+{{   if eq .system "perso" -}}
+{{     template "chezmoiignore.d/ubuntu/perso" . }}
+{{   else if eq .system "work" -}}
+{{     template "chezmoiignore.d/ubuntu/work" . }}
+{{   end -}}
+{{ end -}}
