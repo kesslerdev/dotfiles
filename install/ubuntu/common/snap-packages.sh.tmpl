@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+if [ "${DOTFILES_DEBUG:-}" ]; then
+    set -x
+fi
+
+
+function install_snap_packages() {
+{{- range .packages.ubuntu.common.snaps }}
+snap install {{ . }} --classic
+{{- end }}
+{{- range default list (get (default (dict "snaps" list) (index .packages.ubuntu .system)) "snaps") }}
+snap install {{ . }} --classic
+{{- end }}
+}
+
+function uninstall_snap_packages() {
+{{- range .packages.ubuntu.common.snaps }}
+snap remove {{ . }}
+{{- end }}
+{{- range default list (get (default (dict "snaps" list) (index .packages.ubuntu .system)) "snaps") }}
+snap remove {{ . }}
+{{- end }}
+}
+
+function main() {
+    install_snap_packages
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main
+fi

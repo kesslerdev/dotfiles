@@ -24,6 +24,10 @@ packages:
       krews:
       - ctx
       - ns
+      snaps: []
+    perso:
+      snaps:
+      - code
     work:
       brews:
       - derailed/k9s/k9s
