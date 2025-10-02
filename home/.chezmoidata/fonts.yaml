@@ -1,0 +1,4 @@
+fonts:
+  # fonts from https://github.com/ryanoasis/nerd-fonts
+  nerd:
+  - FiraCode

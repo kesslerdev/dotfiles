@@ -1,0 +1,94 @@
+{{- $defaultFonts := list "FiraCode" -}}
+{{- $nerdFonts := default $defaultFonts .fonts.nerd -}}
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+if [ "${DOTFILES_DEBUG:-}" ]; then
+    set -x
+fi
+
+NERD_FONT_VERSION="${NERD_FONT_VERSION:-v3.4.0}"
+readonly NERD_FONT_VERSION
+readonly FONT_DIR="${HOME%/}/.local/share/fonts"
+readonly -a FONT_NAMES=(
+{{- range $nerdFonts }}
+    "{{ . }}"
+{{- end }}
+)
+
+ensure_font_dir() {
+    mkdir -p "${FONT_DIR}"
+}
+
+font_installed() {
+    local font="$1"
+
+    if command -v fc-list >/dev/null 2>&1; then
+        if fc-list | grep -qi -- "${font} Nerd"; then
+            return 0
+        fi
+    fi
+
+    if [ -d "${FONT_DIR}" ]; then
+        local existing
+        existing="$(find "${FONT_DIR}" -maxdepth 1 -type f -iregex ".*/${font}.*NerdFont.*\\.[ot]tf" -print -quit || true)"
+        if [ -n "${existing}" ]; then
+            return 0
+        fi
+    fi
+
+    return 1
+}
+
+install_font() {
+    local font="$1"
+    local tmp_dir
+    local archive="${font}.zip"
+    local url="https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONT_VERSION}/${archive}"
+
+    tmp_dir="$(mktemp -d)"
+    trap 'rm -rf "$tmp_dir"' RETURN
+
+    curl -fsSL "${url}" -o "${tmp_dir}/${archive}"
+    unzip -q "${tmp_dir}/${archive}" -d "${tmp_dir}"
+
+    shopt -s nullglob
+    local file
+    for file in "${tmp_dir}"/*.ttf "${tmp_dir}"/*.otf; do
+        [ -e "${file}" ] || continue
+        install -m 0644 "${file}" "${FONT_DIR%/}/$(basename "${file}")"
+    done
+    shopt -u nullglob
+
+    trap - RETURN
+    rm -rf "${tmp_dir}"
+}
+
+refresh_font_cache() {
+    if command -v fc-cache >/dev/null 2>&1; then
+        fc-cache -f "${FONT_DIR}"
+    fi
+}
+
+main() {
+    local font
+
+    ensure_font_dir
+
+    for font in "${FONT_NAMES[@]}"; do
+        if font_installed "${font}"; then
+            echo "${font} Nerd Font already present"
+            continue
+        fi
+
+        install_font "${font}"
+        echo "${font} Nerd Font installed"
+    done
+
+    refresh_font_cache
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
+fi
