@@ -4,5 +4,6 @@
     "terminal.integrated.gpuAcceleration": "on",
     "editor.fontFamily": "'FiraCode Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
     "editor.fontLigatures": true,
-    "workbench.iconTheme": "material-icon-theme"
+    "workbench.iconTheme": "material-icon-theme",
+    "git.autofetch": true
 }

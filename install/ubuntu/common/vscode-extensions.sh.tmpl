@@ -8,10 +8,7 @@ fi
 
 function install_code_exts() {
     if type code >/dev/null 2>&1; then
-{{- range .packages.ubuntu.common.vscode }}
-code --install-extension {{ . }}
-{{- end }}
-{{- range default list (get (default (dict "vscode" list) (index .packages.ubuntu .system)) "vscode") }}
+{{- range fromJson (includeTemplate "helpers/packages" (list . "vscode")) }}
 code --install-extension {{ . }}
 {{- end }}
     else

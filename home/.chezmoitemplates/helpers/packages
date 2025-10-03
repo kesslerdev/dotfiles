@@ -1,0 +1,14 @@
+{{- $root := first . -}}
+{{- $key := last . -}}
+{{- $currentSystem := $root.system -}}
+{{- $packages:= dig "packages" (dict) $root }}
+{{- $commonPackages := dig "all" "common" $key (list) $packages -}}
+{{- $systemPackages := dig "all" $currentSystem $key (list) $packages -}}
+
+{{- $os := $root.chezmoi.osRelease.idLike -}}
+{{- $osKey := ternary "ubuntu" $os (eq $os "debian") -}}
+{{- $commonOsPackages := dig $osKey "common" $key (list) $packages -}}
+{{- $systemOsPackages := dig $osKey $currentSystem $key (list) $packages -}}
+
+{{- $merged := concat $commonPackages $systemPackages $commonOsPackages $systemOsPackages -}}
+{{ toJson $merged }}

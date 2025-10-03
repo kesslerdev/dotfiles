@@ -24,11 +24,9 @@ packages:
       krews:
       - ctx
       - ns
-      snaps: []
       vscode:
       - PKief.material-icon-theme
     perso:
-      snaps: []
       vscode:
       - openai.chatgpt
     work:

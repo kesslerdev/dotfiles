@@ -7,10 +7,7 @@ if [ "${DOTFILES_DEBUG:-}" ]; then
 fi
 
 function install_krew_packages() {
-{{- range .packages.ubuntu.common.krews }}
-/home/linuxbrew/.linuxbrew/bin/kubectl-krew install {{ . }}
-{{- end }}
-{{- range default list (get (default (dict "krews" list) (index .packages.ubuntu .system)) "krews") }}
+{{- range fromJson (includeTemplate "helpers/packages" (list . "krews")) }}
 /home/linuxbrew/.linuxbrew/bin/kubectl-krew install {{ . }}
 {{- end }}
 }

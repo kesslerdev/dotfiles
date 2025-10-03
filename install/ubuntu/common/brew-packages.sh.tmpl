@@ -9,10 +9,7 @@ fi
 
 function install_brew_packages() {
     /home/linuxbrew/.linuxbrew/bin/brew bundle --cleanup --file=/dev/stdin <<EOF
-{{- range .packages.ubuntu.common.brews }}
-brew {{ . | quote }}
-{{- end }}
-{{- range default list (get (default (dict "brews" list) (index .packages.ubuntu .system)) "brews") }}
+{{- range fromJson (includeTemplate "helpers/packages" (list . "brews")) }}
 brew {{ . | quote }}
 {{- end }}
 EOF
