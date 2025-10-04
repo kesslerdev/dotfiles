@@ -1,4 +1,9 @@
 packages:
+  all:
+    common:
+      vscode:
+      - gruntfuggly.todo-tree
+      - PKief.material-icon-theme
   ubuntu:
     common:
       apt:
@@ -23,9 +28,7 @@ packages:
       - bat
       krews:
       - ctx
-      - ns
-      vscode:
-      - PKief.material-icon-theme
+      - ns      
     perso:
       vscode:
       - openai.chatgpt
